@@ -1,0 +1,225 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy-blue: hsl(236deg 24.15% 12.8%);
+    --midnight-blue: hsl(235, 24%, 19%);
+    --light-pastel-lavender: hsl(234, 39%, 85%);
+    --semi-transparent-light-pastel-lavender: hsl(234deg 39% 85% / 58%);
+    --white: white;
+    --bg-img: url(bg-desktop-dark.jpg);
+}
+
+.light-theme {
+    --navy-blue: hsl(236, 33%, 92%);
+    --midnight-blue: hsl(0, 0%, 98%);
+    --light-pastel-lavender: hsl(235, 19%, 35%);
+    --semi-transparent-light-pastel-lavender: hsl(236, 9%, 61%);
+    --white: black;
+    --bg-img: url(bg-desktop-light.jpg);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: var(--bg-img);
+    background-repeat: no-repeat;
+    background-color: var(--navy-blue);
+    height: 100vh;
+    margin: 0;
+    /* overflow: hidden; */
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-bottom: 24px;
+}
+
+#change-theme-button {
+    border: none;
+    background-color: transparent;
+}
+
+#TODO-p {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: white;
+    margin: 0;
+    letter-spacing: 10px;
+}
+
+#newTask {
+    display: flex;
+    align-items: end;
+    background-color: var(--midnight-blue);
+    padding: 15px 30px;
+    width: 500px;
+    border-radius: 8px;
+}
+
+#addButton {
+    background-color: inherit;
+    border-radius: 50%;
+    border: 1px solid hsl(234deg 31.31% 84.17% / 34%);
+    height: 25px;
+    width: 25px;
+    margin-right: 18px;
+}
+
+input {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--light-pastel-lavender);
+    caret-color: hsl(234deg 100% 56.94%);
+    padding: 0;
+}
+
+input::placeholder {
+    color: var(--semi-transparent-light-pastel-lavender);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 500px;
+}
+
+li {
+    display: flex;
+    align-items: end;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 16px 30px;
+    background-color: var(--midnight-blue);
+}
+
+li:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+li:last-child {
+    border-end-end-radius: 8px;
+    border-end-start-radius: 8px;
+}
+
+.completed-task:hover, .uncompleted-task:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    transition: 500ms;
+}
+
+.completed-task {
+    color: hsl(233, 14%, 35%);
+    border-bottom: 1px solid hsl(234deg 31.31% 84.17% / 34%);
+    text-decoration: line-through;
+}
+
+.uncompleted-task {
+    color: var(--light-pastel-lavender);
+    border-bottom: 1px solid hsl(234deg 31.31% 84.17% / 34%);
+}
+
+button {
+    cursor: pointer;
+}
+
+.completed-task-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(73deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    height: 25px;
+    width: 25px;
+    margin-right: 18px;
+}
+
+.uncompleted-task-icon {
+    border-radius: 50%;
+    border: 1px solid hsl(234deg 31.31% 84.17% / 34%);
+    height: 25px;
+    width: 25px;
+    margin-right: 18px;
+    background-color: var(--midnight-blue);
+}
+
+.uncompleted-task-icon:hover {
+    border: 1px solid;
+    border-color: #02fff3 #df00d8 #df00d8 #02fff3;
+}
+
+.deleteButtons {
+    display: none;
+    background-color: inherit;
+    border: none;
+    padding: 0;
+    height: 18px;
+    flex-grow: 1;
+    text-align: end;
+}
+
+li:hover .deleteButtons {
+    display: block;
+}
+
+.sort-Buttons {
+    background-color: inherit;
+    color: var(--semi-transparent-light-pastel-lavender);
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    padding: 0;
+    font-size: 13px;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+#clearButton {
+    background-color: inherit;
+    color: var(--semi-transparent-light-pastel-lavender);
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    padding: 0;
+    font-size: 13px;
+    cursor: pointer;
+    flex-grow: 3;
+    text-align: end;
+}
+
+.hoverOverSortButtons, #clearButton:hover {
+    transition: 500ms;
+    color: var(--white);
+}
+
+#items-left-p {
+    color: var(--semi-transparent-light-pastel-lavender);
+    font-size: 13px;
+    margin: 0;
+    flex-grow: 3;
+}
+
+.hidden {
+    display: none;
+}
+
+.clickedSortButton {
+    color: hsl(234deg 100% 56.94%);
+}
+
