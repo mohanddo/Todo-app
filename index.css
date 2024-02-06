@@ -223,3 +223,6 @@ li:hover .deleteButtons {
     color: hsl(234deg 100% 56.94%);
 }
 
+li.dragging {
+    opacity: 0.5;
+  }

@@ -80,6 +80,7 @@ let creatTask = () => {
     if(taskText.value.length != 0) {
        
         let task = document.createElement("li");
+        task.draggable = "true";
         task.textContent = taskText.value;
         taskText.value = "";
         task.className = "uncompleted-task animate__animated animate__fadeInLeft";
@@ -89,6 +90,8 @@ let creatTask = () => {
         creatButton(task);
         creatDeleteButton(task);
         itemsLeft.textContent = `${document.querySelectorAll('li').length - 1} items left`     
+
+        updateDraggables();
     }
 }
 
@@ -126,12 +129,10 @@ let displayAllTasks = () => {
     }
 }
 
-addButton.addEventListener('click', creatTask)
+addButton.addEventListener('click', creatTask);
 
 
-
-clearButton.addEventListener('click', removeCompletedTasks)
-
+clearButton.addEventListener('click', removeCompletedTasks);
 
 
 displayActive.addEventListener('click', () => {
@@ -177,4 +178,48 @@ taskText.addEventListener('keydown', (event) => {
         creatTask();
     }
 })
+
+
+
+ul.addEventListener('dragover', e => {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(e.clientY);
+    const draggable = document.querySelector('.dragging');
+
+    if(afterElement === null) {
+        ul.appendChild(draggable);
+    } else {
+        ul.insertBefore(draggable, afterElement);
+    }
+})
+
+function getDragAfterElement(y) {
+    const draggableElements = [...document.querySelectorAll('li:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = (y - box.top - box.height / 2);
+        
+        if(offset < 0 && offset > closest.offset) {
+            return { offset : offset , element : child}
+        } else {
+            return closest
+        }
+
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+const updateDraggables = () => {
+    const draggables = document.querySelectorAll('li:not(#last-li-element)');
+
+    draggables[0].addEventListener('dragstart', () => {
+        draggables[0].classList.add('dragging');
+    })
+
+    draggables[0].addEventListener('dragend', () => {
+        draggables[0].classList.remove('dragging');
+    })
+}
+
+
 
